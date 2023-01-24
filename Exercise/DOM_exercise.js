@@ -11,10 +11,13 @@ let wordCount = 0;
 const spanedArr = textArr.map(word => {
   wordCount++;
   let wordLength = word.length;
-  if(word.match(".")) wordLength--;
-  if(word.match(",")) wordLength--;
-  if(word.match("!")) wordLength--;
-  if(word.match(/\?/)) wordLength--;
+  for(let i = 0; i < wordLength; i++) {
+    if(word[i] === ".") wordLength--;
+    if(word[i] === ",") wordLength--;
+    if(word[i] === "!") wordLength--;
+    if(word[i] === "?") wordLength--;
+    if(word[i] === "/") wordLength--;
+  }
   if(wordLength > 8) {
     return `<span class='eightLong'>${word}</span>`;
   }
@@ -84,7 +87,6 @@ document.querySelector("body").insertBefore(wordCountNode, paragraph);
   Replace all question marks (?) with thinking faces (🤔) and exclamation marks (!) with astonished faces (😲)
 */
 const paragraph3 = paragraph.childNodes;
-console.log(paragraph3);
 paragraph3.forEach(p => {
   p.innerHTML = p.innerHTML.replace("?", "🤔");
   p.innerHTML = p.innerHTML.replace("!", "😲");
